@@ -290,7 +290,11 @@ async function checkCompression(filePath, options) {
       );
     }
 
-    if (reductionPercentage > MAX_COMPRESSION_DIFFERENCE_PERCENTAGE) {
+    const maxCompressionDifferencePercentage =
+      options.maxCompressionDifferencePercentage ??
+      MAX_COMPRESSION_DIFFERENCE_PERCENTAGE;
+
+    if (reductionPercentage > maxCompressionDifferencePercentage) {
       if (options.saveCompression) {
         console.log(
           `Compressed ${filePath}. New file is ${reductionPercentage.toFixed(
